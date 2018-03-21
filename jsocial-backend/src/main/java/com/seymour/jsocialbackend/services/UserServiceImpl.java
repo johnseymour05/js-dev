@@ -13,6 +13,7 @@ import com.seymour.jsocialbackend.repository.UserRepository;
 @Service
 public class UserServiceImpl implements UserService {
 
+	
 	@Autowired
 	UserRepository ur;
 
