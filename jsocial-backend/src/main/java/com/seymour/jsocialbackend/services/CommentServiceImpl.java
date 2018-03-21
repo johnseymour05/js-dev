@@ -21,4 +21,10 @@ public class CommentServiceImpl implements CommentService {
 		return new ResponseEntity<>(cr.findAll(), HttpStatus.OK);
 	}
 
+	@Override
+	public ResponseEntity<Comment> createComment(Comment comment) {
+		return new ResponseEntity<>(cr.save(comment), HttpStatus.OK);
+
+	}
+
 }

@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import com.seymour.jsocialbackend.entities.Post;
+import com.seymour.jsocialbackend.entities.User;
 
 public interface PostService {
 
 	ResponseEntity<List<Post>> getAllPosts();
+
+	ResponseEntity<Post> createPost(Post post);
 
 }

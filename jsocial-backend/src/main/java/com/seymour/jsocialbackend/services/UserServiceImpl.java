@@ -18,7 +18,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public ResponseEntity<List<User>> getAllUsers()  {
-		System.err.println("in user service");
 		return new ResponseEntity<>(ur.findAll(), HttpStatus.OK);
+	}
+
+	@Override
+	public ResponseEntity<User> createUser(User user) {
+		return new ResponseEntity<>(ur.save(user), HttpStatus.OK);
 	}
 }
