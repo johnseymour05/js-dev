@@ -16,7 +16,7 @@ public class PostServiceImpl implements PostService {
 
 	@Autowired
 	PostRepository pr;
-	
+
 	@Override
 	public ResponseEntity<List<Post>> getAllPosts() {
 		return new ResponseEntity<>(pr.findAll(), HttpStatus.OK);
@@ -26,5 +26,30 @@ public class PostServiceImpl implements PostService {
 	public ResponseEntity<Post> createPost(Post post) {
 		return new ResponseEntity<>(pr.save(post), HttpStatus.OK);
 	}
+
+	@Override
+	public ResponseEntity<Post> getPostById(int postId) {
+		Post post = pr.findById(postId).get();
+		return new ResponseEntity<Post>(post, HttpStatus.OK);
+	}
+
+	@Override
+	public ResponseEntity<List<Post>> getPostsByUserId(int userId) {
+		List<Post> posts = pr.findAllByUserId(userId);
+		return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
+	}
+
+	@Override
+	public ResponseEntity<List<Post>> getPostsOfUsersFollowed(int[] userId) {
+		List<Post> posts = pr.findAllByUserIds(userId);
+		return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
+	}
+	
+	@Override
+	public ResponseEntity<List<Post>> findAllByUserIds(int[] userId) {
+		List<Post> posts = pr.findAllByUserIds(userId);
+		return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
+	}
+
 	
 }

@@ -74,4 +74,9 @@ public class SocialController {
 		System.err.println("hello");
 		return "hello";
 	}
+	@GetMapping("/test2")
+	public String hello2() {
+		System.err.println("hello");
+		return "hello";
+	}
 }

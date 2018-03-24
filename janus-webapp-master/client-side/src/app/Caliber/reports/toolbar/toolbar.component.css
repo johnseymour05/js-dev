@@ -1,0 +1,27 @@
+.button {
+    background-color: rgb(255, 255, 255); /* Green */
+    border: none;
+    color: #F26925;
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.form-inline {
+    padding-top: 12px;
+}
+
+.input-group {
+    padding-right: 4px;
+}
+
+select {
+    cursor: pointer;
+}
+
+.paddingRight {
+    padding-right: 25px;
+}

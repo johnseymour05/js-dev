@@ -13,4 +13,12 @@ public interface PostService {
 
 	ResponseEntity<Post> createPost(Post post);
 
+	ResponseEntity<Post> getPostById(int postId);
+
+	ResponseEntity<List<Post>> getPostsByUserId(int userId);
+
+	ResponseEntity<List<Post>> getPostsOfUsersFollowed(int[] userId);
+
+	ResponseEntity<List<Post>> findAllByUserIds(int[] userId);
+
 }
