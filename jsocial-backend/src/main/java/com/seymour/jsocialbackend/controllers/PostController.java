@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.seymour.jsocialbackend.entities.Comment;
+import com.seymour.jsocialbackend.entities.Follow;
 import com.seymour.jsocialbackend.entities.Post;
+import com.seymour.jsocialbackend.entities.User;
 import com.seymour.jsocialbackend.services.PostService;
 
 @RestController
@@ -41,25 +43,20 @@ public class PostController {
 		return ps.getPostById(postId);
 	}
 	
-	@PostMapping("/create")
-	public ResponseEntity<Post> createPost(@RequestBody Post post) {
-		logger.debug("Post Controller: createPost");
-		return ps.createPost(post);
-	}
 	@GetMapping("/userId/{userId}")
 	public ResponseEntity<List<Post>> getPostsByUserId(@PathVariable int userId) {
 		logger.debug("Post Controller: getPostsByUserId");
 		return ps.getPostsByUserId(userId);
 	}
-		
-	@PostMapping("/following")
-	public ResponseEntity<List<Post>> getPostsOfUsersFollowed(@RequestBody Integer[] userId) {
-		System.err.println(userId.toString());
-		logger.debug("Post Controller: getPostsOfUsersFollowed");
-		Set<Integer> mySet = new HashSet<Integer>();
-		Collections.addAll(mySet, userId);
-		System.err.println(mySet.toString());
-		return ps.getPostsOfUsersFollowed(mySet);
+	
+	@PostMapping("/create")
+	public ResponseEntity<Post> createPost(@RequestBody Post post) {
+		logger.debug("Post Controller: createPost");
+		return ps.createPost(post);
+	}
+	@GetMapping("/following/{userId}")
+	public ResponseEntity<List<Post>> getPostsOfUsersFollowed(@PathVariable int userId) {
+		return ps.getPostsOfUsersFollowed(userId);
 	}
 	@PostMapping("/addComment")
 	public ResponseEntity<Post> addComment(@RequestBody Comment comment) {

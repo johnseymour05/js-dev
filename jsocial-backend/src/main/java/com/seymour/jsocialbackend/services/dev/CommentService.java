@@ -1,4 +1,4 @@
-package com.seymour.jsocialbackend.services;
+package com.seymour.jsocialbackend.services.dev;
 
 import java.util.List;
 

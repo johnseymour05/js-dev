@@ -15,26 +15,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.seymour.jsocialbackend.entities.Credentials;
 import com.seymour.jsocialbackend.entities.User;
-import com.seymour.jsocialbackend.entities.UserFollowerId;
-import com.seymour.jsocialbackend.services.UserFollowerIdService;
+import com.seymour.jsocialbackend.entities.Follow;
 import com.seymour.jsocialbackend.services.UserService;
+import com.seymour.jsocialbackend.services.dev.UserFollowerIdService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 	
 	@Autowired
 	UserService us;
 	
-	@Autowired
-	UserFollowerIdService ufs;
-	
-	@GetMapping("/all-users")
+	@GetMapping("/all")
 	public ResponseEntity<List<User>> getAllUsers() {
 		return us.getAllUsers();
 	}
 	
-	@PostMapping("/create-user")
+	@PostMapping("/create")
 	public ResponseEntity<User> createUser(@RequestBody User user) {
 		return us.createUser(user);
 	}
@@ -43,20 +40,19 @@ public class UserController {
 	public ResponseEntity<User> login(@RequestBody Credentials cred) {
 		return us.login(cred);
 	}
-
-	@GetMapping("/test")
-	public String hello() {
-		System.err.println("hello");
-		return "hello";
+	
+	@GetMapping("/usersfollowed/{userId}")
+	public ResponseEntity<List<User>> getFollowedUsers(@PathVariable int userId) {
+		return us.getFollowedUsers(userId);
 	}
 	
-	@PostMapping("/following")
-	public ResponseEntity<List<User>> getFollowedUsers(@RequestBody User user) {
-		return us.getFollowedUsers(user);
-	}
 	@PostMapping("/followUser")
-	public ResponseEntity<User> followUser(@RequestBody UserFollowerId userIdToFollow) {
-		return us.followUser(userIdToFollow);
+	public ResponseEntity<User> followUser(@RequestBody Follow follow) {
+		return us.followUser(follow);
+	}
+	@PostMapping("/unfollowUser")
+	public ResponseEntity<User> unfollowUser(@RequestBody Follow follow) {
+		return us.unfollowUser(follow);
 	}
 	
 }

@@ -12,9 +12,11 @@ import org.springframework.stereotype.Service;
 
 import com.seymour.jsocialbackend.controllers.PostController;
 import com.seymour.jsocialbackend.entities.Comment;
+import com.seymour.jsocialbackend.entities.Follow;
 import com.seymour.jsocialbackend.entities.Post;
 import com.seymour.jsocialbackend.entities.User;
 import com.seymour.jsocialbackend.repository.PostRepository;
+import com.seymour.jsocialbackend.repository.UserRepository;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -23,6 +25,8 @@ public class PostServiceImpl implements PostService {
 
 	@Autowired
 	PostRepository pr;
+	@Autowired
+	UserRepository ur;
 
 	@Override
 	public ResponseEntity<List<Post>> getAllPosts() {
@@ -51,14 +55,19 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public ResponseEntity<List<Post>> getPostsOfUsersFollowed(Set<Integer> userIds) {
+	public ResponseEntity<List<Post>> getPostsOfUsersFollowed(int userId) {
+		
 		logger.debug("PostServiceImpl: getPostsOfUsersFollowed");
-		List<Post> allPosts = new ArrayList<>();
-		for (int i : userIds) {
-			List<Post> posts = pr.findAllByUserId(i);
-			allPosts.addAll(posts);
+		
+		User user = ur.findById(userId);
+		Set<Follow> follows = user.getFollows();
+		List<Post> followedPosts = new ArrayList<>();
+		
+		for (Follow follow : follows) {
+			List<Post> posts = pr.findAllByUserId(follow.getFollowedUserId());
+			followedPosts.addAll(posts);
 		}
-		return new ResponseEntity<List<Post>>(allPosts, HttpStatus.OK);
+		return new ResponseEntity<List<Post>>(followedPosts, HttpStatus.OK);
 	}
 	
 	@Override

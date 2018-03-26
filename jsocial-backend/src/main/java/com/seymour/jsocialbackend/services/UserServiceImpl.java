@@ -2,6 +2,7 @@ package com.seymour.jsocialbackend.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.seymour.jsocialbackend.entities.Credentials;
 import com.seymour.jsocialbackend.entities.Post;
 import com.seymour.jsocialbackend.entities.User;
-import com.seymour.jsocialbackend.entities.UserFollowerId;
+import com.seymour.jsocialbackend.entities.Follow;
 import com.seymour.jsocialbackend.repository.UserRepository;
 
 @Service
@@ -41,23 +42,43 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public ResponseEntity<List<User>> getFollowedUsers(User user) {
+	public ResponseEntity<List<User>> getFollowedUsers(int userId) {
+		
+		User user = ur.findById(userId);
+		
 		List<User> allUsers = new ArrayList<>();
 
-		for(UserFollowerId uf : user.getUserFollowerId()) {
+		for(Follow uf : user.getFollows()) {
 			User u = ur.findById(uf.getFollowedUserId());
 			allUsers.add(u);
-		}		
+		}
+		
 		return new ResponseEntity<List<User>>(allUsers, HttpStatus.OK);
 		
 	}
 
 	@Override
-	public ResponseEntity<User> followUser(UserFollowerId userIdToFollow) {
-		User user = ur.findById(userIdToFollow.getUserId());
-		user.getUserFollowerId().add(userIdToFollow);
+	public ResponseEntity<User> followUser(Follow follow) {
+		
+		User user = ur.findById(follow.getUserId());
+		user.getFollows().add(follow);
 		ur.save(user);
 		
+		return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
+
+	@Override
+	public ResponseEntity<User> unfollowUser(Follow followToRemove) {
+
+		User user = ur.findById(followToRemove.getUserId());
+		Set<Follow> userFollows = user.getFollows();
+
+		for (Follow userFollow : userFollows) {
+			if(followToRemove.getFollowedUserId() == userFollow.getFollowedUserId()) {
+				user.getFollows().remove(userFollow);
+				ur.save(user);
+			}
+		}
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 }

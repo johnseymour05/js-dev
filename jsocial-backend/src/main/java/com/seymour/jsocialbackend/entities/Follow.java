@@ -2,16 +2,21 @@ package com.seymour.jsocialbackend.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="users_followers")
-public class UserFollowerId {
+@Table(name="follows")
+public class Follow {
 
 	@Id
-	@Column(name="users_followers_id")
-	private int usersFollowersId;
+	@SequenceGenerator(name = "FOLLOW_SEQ", sequenceName = "FOLLOW_SEQ")
+	@GeneratedValue(generator = "FOLLOW_SEQ", strategy = GenerationType.AUTO)
+	@Column(name="follow_id")
+	private int followId;
 	
 	@Column(name="user_id")
 	private int userId;
@@ -19,24 +24,24 @@ public class UserFollowerId {
 	@Column(name="followed_user_id")
 	private int followedUserId;
 
-	public UserFollowerId() {
+	public Follow() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserFollowerId(int usersFollowersId, int userId, int followedUserId) {
+	public Follow(int followId, int userId, int followedUserId) {
 		super();
-		this.usersFollowersId = usersFollowersId;
+		this.followId = followId;
 		this.userId = userId;
 		this.followedUserId = followedUserId;
 	}
 
-	public int getUsersFollowersId() {
-		return usersFollowersId;
+	public int getFollowId() {
+		return followId;
 	}
 
-	public void setUsersFollowersId(int usersFollowersId) {
-		this.usersFollowersId = usersFollowersId;
+	public void setFollowId(int followId) {
+		this.followId = followId;
 	}
 
 	public int getUserId() {
@@ -59,9 +64,9 @@ public class UserFollowerId {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + followId;
 		result = prime * result + followedUserId;
 		result = prime * result + userId;
-		result = prime * result + usersFollowersId;
 		return result;
 	}
 
@@ -73,21 +78,19 @@ public class UserFollowerId {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UserFollowerId other = (UserFollowerId) obj;
+		Follow other = (Follow) obj;
+		if (followId != other.followId)
+			return false;
 		if (followedUserId != other.followedUserId)
 			return false;
 		if (userId != other.userId)
-			return false;
-		if (usersFollowersId != other.usersFollowersId)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "UserFollowerId [usersFollowersId=" + usersFollowersId + ", userId=" + userId + ", followedUserId="
-				+ followedUserId + "]";
+		return "Follow [followId=" + followId + ", userId=" + userId + ", followedUserId=" + followedUserId + "]";
 	}
-	
 	
 }

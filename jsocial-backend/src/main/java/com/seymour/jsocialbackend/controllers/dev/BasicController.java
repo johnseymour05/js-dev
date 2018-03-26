@@ -1,4 +1,4 @@
-package com.seymour.jsocialbackend.controllers;
+package com.seymour.jsocialbackend.controllers.dev;
 
 import java.util.List;
 
@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.seymour.jsocialbackend.entities.Comment;
 import com.seymour.jsocialbackend.entities.Post;
 import com.seymour.jsocialbackend.entities.User;
-import com.seymour.jsocialbackend.entities.UserFollowerId;
-import com.seymour.jsocialbackend.services.CommentService;
+import com.seymour.jsocialbackend.entities.Follow;
 import com.seymour.jsocialbackend.services.PostService;
-import com.seymour.jsocialbackend.services.UserFollowerIdService;
 import com.seymour.jsocialbackend.services.UserService;
+import com.seymour.jsocialbackend.services.dev.CommentService;
+import com.seymour.jsocialbackend.services.dev.UserFollowerIdService;
 
 @RestController
-@RequestMapping("/social")
-public class SocialController {
+@RequestMapping("/basic")
+public class BasicController {
 	
 	@Autowired
 	UserService us;
@@ -60,11 +60,11 @@ public class SocialController {
 	}
 	
 	@GetMapping("/followed-user-ids")
-	public ResponseEntity<List<UserFollowerId>> getAllUserFollowerIds() {
+	public ResponseEntity<List<Follow>> getAllUserFollowerIds() {
 		return ufs.getAllUserFollowerIds();
 	}
 	@PostMapping("/followed-user-ids")
-	public ResponseEntity<UserFollowerId> createUserFollowerId(@RequestBody UserFollowerId userFollowerId) {
+	public ResponseEntity<Follow> createUserFollowerId(@RequestBody Follow userFollowerId) {
 		return ufs.createUserFollowerId(userFollowerId);
 	}
 

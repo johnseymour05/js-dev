@@ -1,4 +1,4 @@
-package com.seymour.jsocialbackend.services;
+package com.seymour.jsocialbackend.services.dev;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.seymour.jsocialbackend.entities.User;
-import com.seymour.jsocialbackend.entities.UserFollowerId;
+import com.seymour.jsocialbackend.entities.Follow;
 import com.seymour.jsocialbackend.repository.UserFollowerIdRepository;
 
 @Service
@@ -18,12 +18,12 @@ public class UserFollowerIdServiceImpl implements UserFollowerIdService {
 	UserFollowerIdRepository ufr;
 	
 	@Override
-	public ResponseEntity<List<UserFollowerId>> getAllUserFollowerIds() {
+	public ResponseEntity<List<Follow>> getAllUserFollowerIds() {
 		return new ResponseEntity<>(ufr.findAll(), HttpStatus.OK);
 	}
 
 	@Override
-	public ResponseEntity<UserFollowerId> createUserFollowerId(UserFollowerId userFollowerId) {
+	public ResponseEntity<Follow> createUserFollowerId(Follow userFollowerId) {
 		return new ResponseEntity<>(ufr.save(userFollowerId), HttpStatus.OK);
 	}
 

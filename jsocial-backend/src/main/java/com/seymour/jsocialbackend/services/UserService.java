@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import com.seymour.jsocialbackend.entities.Comment;
 import com.seymour.jsocialbackend.entities.Credentials;
 import com.seymour.jsocialbackend.entities.User;
-import com.seymour.jsocialbackend.entities.UserFollowerId;
+import com.seymour.jsocialbackend.entities.Follow;
 
 public interface UserService {
 
@@ -17,8 +17,10 @@ public interface UserService {
 
 	ResponseEntity<User> login(Credentials cred);
 
-	ResponseEntity<List<User>> getFollowedUsers(User user);
+	ResponseEntity<List<User>> getFollowedUsers(int userId);
 
-	ResponseEntity<User> followUser(UserFollowerId userIdToFollow);
+	ResponseEntity<User> followUser(Follow follow);
+
+	ResponseEntity<User> unfollowUser(Follow followToRemove);
 
 }

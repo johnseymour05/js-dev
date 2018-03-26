@@ -5,8 +5,11 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -14,6 +17,8 @@ import javax.persistence.Table;
 public class User {
 
 	@Id
+	@SequenceGenerator(name = "USER_SEQ", sequenceName = "USER_SEQ")
+	@GeneratedValue(generator = "USER_SEQ", strategy = GenerationType.AUTO)
 	@Column(name = "user_id")
 	private int userId;
 	private String username;
@@ -21,22 +26,21 @@ public class User {
 	private String email;
 	private String bio;
 	@OneToMany(cascade = CascadeType.ALL)
-	private Set<UserFollowerId> userFollowerId;
+	private Set<Follow> follows;
 	
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int userId, String username, String password, String email, String bio,
-			Set<UserFollowerId> userFollowerId) {
+	public User(int userId, String username, String password, String email, String bio, Set<Follow> follows) {
 		super();
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.email = email;
 		this.bio = bio;
-		this.userFollowerId = userFollowerId;
+		this.follows = follows;
 	}
 
 	public int getUserId() {
@@ -79,12 +83,12 @@ public class User {
 		this.bio = bio;
 	}
 
-	public Set<UserFollowerId> getUserFollowerId() {
-		return userFollowerId;
+	public Set<Follow> getFollows() {
+		return follows;
 	}
 
-	public void setUserFollowerId(Set<UserFollowerId> userFollowerId) {
-		this.userFollowerId = userFollowerId;
+	public void setFollows(Set<Follow> follows) {
+		this.follows = follows;
 	}
 
 	@Override
@@ -93,8 +97,8 @@ public class User {
 		int result = 1;
 		result = prime * result + ((bio == null) ? 0 : bio.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((follows == null) ? 0 : follows.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((userFollowerId == null) ? 0 : userFollowerId.hashCode());
 		result = prime * result + userId;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -119,15 +123,15 @@ public class User {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
+		if (follows == null) {
+			if (other.follows != null)
+				return false;
+		} else if (!follows.equals(other.follows))
+			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
-			return false;
-		if (userFollowerId == null) {
-			if (other.userFollowerId != null)
-				return false;
-		} else if (!userFollowerId.equals(other.userFollowerId))
 			return false;
 		if (userId != other.userId)
 			return false;
@@ -142,7 +146,9 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email
-				+ ", bio=" + bio + ", userFollowerId=" + userFollowerId + "]";
+				+ ", bio=" + bio + ", follows=" + follows + "]";
 	}
+
+	
 	
 }
