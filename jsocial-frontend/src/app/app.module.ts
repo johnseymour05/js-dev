@@ -9,10 +9,6 @@ import { RouterModule } from '@angular/router';
 import {AppComponent} from './app.component';
 import {NavComponent} from './nav/nav.component';
 import {FirstComponent} from './components/first/first.component';
-import {AnotherComponent} from './components/another/another.component';
-import {BeanComponent} from './components/bean/bean.component';
-import {PokemonComponent} from './components/pokemon/pokemon.component';
-import {UserComponent} from './components/user/user.component';
 import { appRoutes } from './routes';
 
 @NgModule({
@@ -21,20 +17,16 @@ import { appRoutes } from './routes';
    HttpModule,
    NgbModule.forRoot(),
    RouterModule.forRoot(appRoutes),
-   FormsModule
+   FormsModule,
  ],
  declarations: [
-   AppComponent,
-   NavComponent,
+  AppComponent,
+  NavComponent,
    FirstComponent,
-   AnotherComponent,
-   BeanComponent,
-   PokemonComponent,
-   UserComponent
   ],
  providers: [
 
-  ],
+ ],
  bootstrap: [AppComponent]
 })
 export class AppModule { }
