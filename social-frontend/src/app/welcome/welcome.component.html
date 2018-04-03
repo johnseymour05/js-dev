@@ -1,0 +1,10 @@
+welcome works
+
+<div style="padding: 50px;">
+    <div class="form-group">
+        <textarea class="form-control" [(ngModel)]="post.comment" rows="3" id="pst" placeholder="Write Something!"></textarea>
+        <button type="button" class="btn right" (click)="createPost()">Submit</button>
+    </div>
+</div>
+
+{{posts | json}}

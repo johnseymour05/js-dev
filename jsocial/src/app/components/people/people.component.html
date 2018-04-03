@@ -1,0 +1,24 @@
+people works
+<br>
+{{people | json}}
+
+
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>User Id</th>
+                <th>Username</th>
+            </tr>
+        </thead>
+        <tbody id="ers-table-body">
+            <tr *ngFor = "let user of people">
+                <td>{{user.userId}}</td>
+                <td>{{user.username}}</td>
+                <td>
+                    <button (click)="followUser(user)">Follow {{user.username}}</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

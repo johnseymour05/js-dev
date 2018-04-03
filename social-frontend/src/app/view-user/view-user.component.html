@@ -1,0 +1,57 @@
+view user:
+
+{{viewUser.username}}
+
+
+{{viewUser.username}}'s Posts:
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Post Number</th>
+                <th>User Id</th>
+                <th>Post</th>
+            </tr>
+        </thead>
+        <tbody id="ers-table-body">
+            <tr *ngFor = "let post of posts">
+                <td>{{post.postId}}</td>
+                <td>{{post.userId}}</td>
+                <td>{{post.comment}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Welcome: {{user.username}}!
+
+
+<br>
+Write Something!
+<div>
+<input type="text" [(ngModel)]="post.comment">
+<button type="input"  (click)="createPost()">Submit</button>
+</div>
+
+<br>
+<button type="input"  (click)="navUsers()">View Other Users</button>
+<br>
+
+Your Posts:
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Post Number</th>
+                <th>User Id</th>
+                <th>Post</th>
+            </tr>
+        </thead>
+        <tbody id="ers-table-body">
+            <tr *ngFor = "let post of posts">
+                <td>{{post.postId}}</td>
+                <td>{{post.userId}}</td>
+                <td>{{post.comment}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div> -->

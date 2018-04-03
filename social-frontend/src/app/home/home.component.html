@@ -1,0 +1,42 @@
+
+<div style="padding: 50px;">
+    <div class="form-group">
+        <textarea class="form-control" [(ngModel)]="post.comment" rows="3" id="pst" placeholder="Write Something!"></textarea>
+        <button type="button" class="btn right" (click)="createPost()">Submit</button>
+    </div>
+</div>
+
+<div style="padding: 50px;">
+    <h1>Your friend's posts</h1>
+    <table class="table">
+        <tbody id="ers-table-body">
+            <tr *ngFor="let post of followedPosts">
+                <td>{{post.comment}}</td>
+                <td>Like</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div style="text-align: center; padding: 20px;">
+    Signed in as: {{user | json}}
+</div>

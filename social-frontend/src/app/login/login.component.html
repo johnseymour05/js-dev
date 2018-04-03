@@ -1,0 +1,22 @@
+<!-- Basic way of submitting user input in angular -->
+<!-- Bind the username and password to a var in the ts file, trigger a login function with a button -->
+
+Login:
+<div>
+    <label>Username</label>
+    <input [(ngModel)]='user.username' type="text">
+    <label>Password</label>
+    <input [(ngModel)]='user.password' type="password">
+    <button type="submit" (click)="login()">Login</button>
+</div>
+<br>
+New User?
+<br>
+Register:
+<div>
+    <label>Username</label>
+    <input [(ngModel)]='regUser.username' type="text">
+    <label>Password</label>
+    <input [(ngModel)]='regUser.password' type="password">
+    <button type="submit" (click)="register()">Register</button>
+</div>
