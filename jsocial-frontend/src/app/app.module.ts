@@ -10,6 +10,7 @@ import {AppComponent} from './app.component';
 import {NavComponent} from './nav/nav.component';
 import {FirstComponent} from './components/first/first.component';
 import { appRoutes } from './routes';
+import { UserService } from './services/users/user.service';
 
 @NgModule({
  imports: [
@@ -25,6 +26,7 @@ import { appRoutes } from './routes';
    FirstComponent,
   ],
  providers: [
+   UserService,
 
  ],
  bootstrap: [AppComponent]
