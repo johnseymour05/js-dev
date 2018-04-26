@@ -8,9 +8,13 @@ import { RouterModule } from '@angular/router';
 
 import {AppComponent} from './app.component';
 import {NavComponent} from './nav/nav.component';
-import {FirstComponent} from './components/first/first.component';
+import {UserComponent} from './components/user/user.component';
 import { appRoutes } from './routes';
 import { UserService } from './services/users/user.service';
+import { HttpClientModule } from '@angular/common/http';
+import { PostComponent } from './components/post/post.component';
+import { PostService } from './services/post/post.service';
+
 
 @NgModule({
  imports: [
@@ -19,14 +23,17 @@ import { UserService } from './services/users/user.service';
    NgbModule.forRoot(),
    RouterModule.forRoot(appRoutes),
    FormsModule,
+   HttpClientModule,
  ],
  declarations: [
   AppComponent,
   NavComponent,
-   FirstComponent,
+  UserComponent,
+  PostComponent,
   ],
  providers: [
    UserService,
+   PostService,
 
  ],
  bootstrap: [AppComponent]

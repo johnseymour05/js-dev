@@ -7,12 +7,12 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
-export class UserService {
+export class PostService {
 
   constructor(private http: HttpClient, private route: Router) { }
 
-  getAllUsers() {
-    return this.http.get('http://localhost:9000/users/all');
+  getAllPosts() {
+    return this.http.get('http://localhost:9000/posts/all');
   }
 
 }

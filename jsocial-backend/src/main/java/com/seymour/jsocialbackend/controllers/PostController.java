@@ -9,6 +9,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ import com.seymour.jsocialbackend.services.PostService;
 
 @RestController
 @RequestMapping("/posts")
+@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200")
 public class PostController {
 	
 	private static final Logger logger = Logger.getLogger(PostController.class);
